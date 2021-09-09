@@ -1,0 +1,13 @@
+{
+  "name": "getting-started-graphql-schema-linter",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "mitani24 <h.mitani@ashita-team.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "graphql-schema-linter": "^2.0.1"
+  },
+  "dependencies": {
+    "graphql": "^15.5.3"
+  }
+}

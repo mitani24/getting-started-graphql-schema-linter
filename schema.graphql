@@ -1,0 +1,117 @@
+"これは Query です"
+type Query {
+  "Fetch a specific track, provided a track's ID"
+  track(" id です " id: ID!): Track!
+  "Query to get tracks array for the homepage grid"
+  tracks(
+    " first "
+    first: Int
+    " last "
+    last: Int
+    " after "
+    after: String
+    " before "
+    before: String
+  ): TrackConnection!
+}
+
+" track connection "
+type TrackConnection {
+  " edges "
+  edges: [TrackEdge]!
+  " pageInfo "
+  pageInfo: PageInfo!
+}
+
+" Track Edge"
+type TrackEdge {
+  " cursor "
+  cursor: String!
+  " node "
+  node: Track!
+}
+
+" ページネーションの情報です "
+type PageInfo {
+  " hasNextPage "
+  hasNextPage: Boolean!
+  " hasPreviousPage "
+  hasPreviousPage: Boolean!
+}
+
+" mutation "
+type Mutation {
+  "Update track content"
+  updateTrack(
+    " id "
+    id: ID!
+    " content "
+    content: UpdateTrackContent!
+  ): UpdateTrackResponse!
+}
+
+" update track content "
+input UpdateTrackContent {
+  " authorId "
+  authorId: String
+  " description "
+  description: String
+  " length "
+  length: Int
+  " modules "
+  modules: [String]
+  " modulesCount "
+  modulesCount: Int
+  " numberOfViews "
+  numberOfViews: Int
+  " thumbnail "
+  thumbnail: String
+  " title "
+  title: String
+}
+
+" update track response "
+type UpdateTrackResponse {
+  "Similar to HTTP status code, represents the status of the mutation"
+  code: Int!
+  "Human-readable message for the UI"
+  message: String!
+  "Indicates whether the mutation was successful"
+  success: Boolean!
+  "Newly updated track after a successful mutation"
+  track: Track
+}
+
+"A track is a group of Modules that teaches about a specific topic"
+type Track {
+  "The track's main Author"
+  author: Author!
+  "The track's main Author ID"
+  authorId: String!
+  "The track's complete description, can be in markdown format"
+  description: String
+  "Id"
+  id: ID!
+  "The track's approximate length to complete, in minutes"
+  length: Int
+  "The track's complete array of Modules"
+  modules: [String]!
+  "The number of modules this track contains"
+  modulesCount: Int
+  "The number of times a track has been viewed"
+  numberOfViews: Int
+  "The track's illustration to display in track card or track page detail"
+  thumbnail: String
+  "The track's title"
+  title: String!
+}
+
+"Author of a complete Track or a Module"
+type Author {
+  "Id"
+  id: ID!
+  "Author's first and last name"
+  name: String!
+  "Author's profile picture"
+  photo: String
+}
